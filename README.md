@@ -5,21 +5,21 @@
 - [Project Description](#project-description)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
 - [Query](#query)
+- [Contributing](#contributing)
 
 ## Project Description
 
-The purpose of this project is to learn how to equally distribute a sharded database across multiple containers using maxscale and docker-compose by altering a .cnf and .yml. We have also written a python file to query said database for a set of data. Finally this README.md rounds out the brain embiggening. 
+The purpose of this project is to learn how to equally distribute a sharded database across multiple containers using maxscale and docker-compose by altering a .cnf and .yml. We have also written a python file to query said database for a set of data. Finally, this README.md rounds out the brain embiggening. 
 
 ## Installation
 
-To begin with, let's make sure we are up to date with our package lists and any necessary updates by entering:
+To begin with, let's make sure we are current with our package lists and any necessary updates by entering:
 ```
 sudo apt-get update
 sudo apt-get upgrade -y
 ```
-Then we have a host of programs running will be dependent on.
+Then we have a host of programs to install which running will be dependent on.
 
 ### MariaDB:
 ```
@@ -65,13 +65,32 @@ We can check that they are up and functional using this command:
 ```
 sudo docker-compose exec maxscale maxctrl list servers
 ```
+
+### Connecting to MariaDB
+You can now connect to and query mariadb directly using:
+```
+sudo mariadb -umaxuser -pmaxpwd -h 127.0.0.1 -P 4000
+```
+
+### Configuring the Maxscale Container
+If you wish to configure the Maxscale container you can open it in nano using:
+```
+sudo nano maxscale.cnf.d/example.cnf
+```
+
+### Configuring Docker-Compose
+If you wish to alter the docker-compose.yml file you can open it in nano using:
+```
+sudo nano docker-compose.yml
+```
+
 ### Running the Python Script
 The python script is dependent on knowing the IP of the maxscale container, which we can find with:
 ```
 sudo docker inspect maxscale_maxscale_1
 ```
 
-Open the python file with:
+Open the python file in nano with:
 ```
 sudo nano main.py
 ```
@@ -92,11 +111,6 @@ Once you are done with the containers, everything can be brought down with:
 ```
 sudo docker-compose down
 ```
-
-## Contributing
-- I'd like to thank Celine for her collaborations on the python code.
-- I'd like to thank the magnificent Zohan for providing the repo that all of this is based off of, found [here](https://github.com/Zohan/maxscale-docker).
-- I'd like to thank Christine for getting me to this point.
 
 ## Query
 The output of the python file should look as follows:
@@ -1232,3 +1246,8 @@ The TotalWages column where state = PA:
 +------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
 
 </details>
+
+## Contributing
+- I'd like to thank Celine (@ceceskii) for her collaborations on the python code.
+- I'd like to thank the magnificent Zohan for providing the repo that all of this is based off of, found [here](https://github.com/Zohan/maxscale-docker).
+- I'd like to thank Christine for getting me to this point.
