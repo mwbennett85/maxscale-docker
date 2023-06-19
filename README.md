@@ -6,7 +6,7 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [Query](#queryoutput)
+- [Query](#query)
 
 ## Project Description
 
@@ -66,7 +66,7 @@ We can check that they are up and functional using this command:
 sudo docker-compose exec maxscale maxctrl list servers
 ```
 ### Running the Python Script
-The python script is dependent on knowing the IP of the maxscale container, which we can find out with:
+The python script is dependent on knowing the IP of the maxscale container, which we can find with:
 ```
 sudo docker inspect maxscale_maxscale_1
 ```
@@ -76,7 +76,11 @@ Open the python file with:
 sudo nano main.py
 ```
 
-And check that the IP address on line 10 (db = mysql.connector.connect(host=**"172.23.0.4"**, port="4000", user="maxuser", password="maxpwd")) matches up. If not, change it.
+And check that the IP address on line 10
+
+db = mysql.connector.connect(host="**172.23.0.4**", port="4000", user="maxuser", password="maxpwd") 
+
+matches the maxscale IP. If not, change it.
 
 You can then run the script with:
 ```
@@ -89,22 +93,27 @@ Once you are done with the containers, everything can be brought down with:
 sudo docker-compose down
 ```
 
-## Contribution
-I'd like to thank Celine for her collaborations on the python code.
-I'd like to thank the magnificent Zohan for providing the repo that all of this is based off of, found [here] (https://github.com/Zohan/maxscale-docker)
-I'd like to thank Christine for getting me to this point.
+## Contributing
+- I'd like to thank Celine for her collaborations on the python code.
+- I'd like to thank the magnificent Zohan for providing the repo that all of this is based off of, found [here](https://github.com/Zohan/maxscale-docker).
+- I'd like to thank Christine for getting me to this point.
 
 ## Query
 The output of the python file should look as follows:
 
-```
+<details>
+<summary>Python Query 1</summary>
+
 The largest zipcode in zipcodes_one:
 
 47750
 
-```
+</details>
 
-```
+
+<details>
+<summary>Python Query 2</summary>
+
 All zipcodes where state = KY:
 
 +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
@@ -492,9 +501,12 @@ All zipcodes where state = KY:
 | 41098 |       |       |       |       |       |       |       |       |       |
 
 +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
-```
+</details>
 
-```
+
+<details>
+<summary>Python Query 3</summary>
+
 All zipcodes between 40000 and 41000:
 
 +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
@@ -650,9 +662,11 @@ All zipcodes between 40000 and 41000:
 | 40390 | 40391 | 40392 | 40771 |       |       |       |       |       |       |
 
 +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
-```
+</details>
 
-```
+<details>
+<summary>Python Query 4</summary>
+
 The TotalWages column where state = PA:
 
 +------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
@@ -1216,4 +1230,5 @@ The TotalWages column where state = PA:
 | 1687695566 |  310512823 |  414603701 |   78000331 |   27252433 |   13272241 |  162927074 |  641553264 |   11794999 |            |
 
 +------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
-```
+
+</details>
